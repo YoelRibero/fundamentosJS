@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Comparaciones</title>
+</head>
+<body>
+
+	<script>
+		
+		var x = 4, y = '4'
+		// Para comparar dos variable utilizamos el operador "=="
+		// En este caso la comparación nos da TRUE. Con el == compara valores y no tipo de variables. Convierte los valores que le damos en un mismo tipo de dato.
+
+		// Para comparar valor y tipos de variables utilizamos el "===". En este caso nos dará FALSE ya que uno es un number y otro un string.
+
+		// Es recomendable utilizar siempre que podamos el triple igual (===).
+
+		var yoel = {
+			nombre: 'Yoel'
+		}
+
+		var otraPersona = {
+			nombre: 'Yoel'
+		}
+
+		// A la hora de comparar objetos JS lo que hace es preguntar por la referencia a la variable que estamos utilizando. Al comparar de cualquier manera este caso nos dará FALSE.
+
+		// Para que esto nos de true debemos guardar a otra persona como el valor de yoel. 
+		// var otraPersona = yoel Para que otraPersona se guarde en el mismo lugar de la memoria RAM que yoel.
+
+		// var otraPersona = {
+		// 	...yoel
+		// }
+		// Al comparar esto nos da false ya que estamos creando un nuevo objeto dentro de otraPersona, a pesar de que estamos desglosando lo que se crea dentro es un nuevo objeto.
+
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Variables Strings</title>
+</head>
+<body>
+	
+	<script>
+		
+		var nombre = 'Yoel', apellido = 'Ribero'
+
+		var nombreEnMayusculas = nombre.toUpperCase() // -> Esta función nos permite convertir nuestro string a mayúsculas
+		var apellidoEnMinusculas = apellido.toLowerCase() // -> Con esta función convertimos nuestro string a minúsculas
+		var primeraLetraDelNombre = nombre.charAt(0) // -> Con esta función pedimos un caracter y como parámetro le pasamos la posición en la que está el mismo.
+		var cantidadDeLetrasDelNombre = nombre.length // -> Con este atributo sabemos la cantidad de caracteres que tienen nuestro string.
+		// var nombreCompleto = nombre + ' ' + apellido  -> De esta forma concatenamos strings
+		var nombreCompleto = `${nombre} ${apellido.toUpperCase()}` // Esta es una forma más nueva de concatenación llamada interpolación de variables. Algo interesante es que dentro de las llaves podemos poner código js, si quisieramos poner todo el apellido en mayúsculas llamamos a la función toUpperCase y listo.
+		var str = nombre.substr(1,2) // -> Acceder a un substring dentro de un string. En este caso queremos acceder a la letra "o" y "e" del string Yoel. Podríamos hacerlo con nombre.charAt(1) + nombre.charAt(2). Pero tenemos la función substr(), que le pasamos como parámetro perimero en dónde queremos que empiece y segundo hasta que posición va a ir.
+
+		// Desafío -> Mostrar a usuario cual es la última letra de su nombre.
+
+		var nombreUsuario = prompt('Dime tu nombre')
+		// var ultimaLetra = nombreUsuario.charAt(nombreUsuario.length-1) -> Dos formas de obtener el último caracter
+		var ultimaLetra = nombreUsuario.substr(-1)
+		alert('La última letra de tu nombre es ' + ultimaLetra)
+
+	</script>
+
+</body>
+</html>

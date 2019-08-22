@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Variables Numbers</title>
+</head>
+<body>
+
+	<script>
+		
+		var edad = 22
+
+		// edad = edad + 1
+		edad += 1 // Las dos cosas son lo mismo, incrementación.
+
+		var peso = 75
+
+		// peso = peso - 2
+
+		peso -= 2 // -> Pasa lo mismo que en la suma. Con sustracción hacemos lo mismo
+
+		var sandwich = 1 
+
+		// peso = peso + sandwich
+		peos += sandwich
+
+		var jugarAlFutbol = 3
+
+		// peso = peso - jugarAlFutbol
+		peso -= jugarAlFutbol
+
+		var precioDeVino = 200.3
+
+		var total = precioDeVino * 3 // -> La manera que tiene JS para almacenar decimales no es muy precisa. Para precisar esto tenemos las funciones matemáticas.
+
+		total = Math.round(precioDeVino * 100 * 3) / 100 // -> Math.round redondea la expresión que tenemos dentro de los paréntesis
+
+		var totalStr = total.toFixed(2) // -> Con esta función le decimos cuantos decimales queremos que tome en cuenta luega de hacer la operación. Tener en cuenta que convierte la variable en String.
+
+		var total2 = parseFloat(totalStr) // -> Esta función transforma un string en un decimal.
+
+		var pizza = 8
+		var personas = 2
+		var cantidadPorcionesPersonas = pizza / personas // Esto nos dice que cada persona come 4 porciones
+
+	</script>
+	
+</body>
+</html>

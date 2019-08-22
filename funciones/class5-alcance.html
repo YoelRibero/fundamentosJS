@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Alcance de Funciones</title>
+</head>
+<body>
+
+	<script>
+		
+		var nombre = 'Yoel' // -> Esta variable es de alcance global, esto significa que podemos acceder a ella dentro de cualquier función. Podemos acceder a ella con window.nombre. Esto nos sierve también para llamar a la variable dentro del cuerpo de la función.
+		// Tengamos en cuenta que con la función estamos modificando una variable global cosa que no es muy buena hacer.
+
+		// function imprimirNombreMayusculas() {
+		// 	nombre = nombre.toUpperCase()
+		// 	console.log(nombre)
+		// }
+
+		// imprimirNombreMayusculas()
+
+		function imprimirNombreMayusculas(n) {
+			n = n.toUpperCase()
+			console.log(n)
+		}
+
+		// Sin embargo al pasarla por parámetro la variable n tiene un alcance local, eso significa que n solo existe dentro del cuerpo de la función. Si quisiéramos acceder a n desde fuera del cuerpo de la función nos dirá undefined xq sólo está definida dentro de la función. Lo bueno de hacerlo de esta manera es que nuestra variable nombre no se modifica, se modifica n.
+		// Otra cosa es que al tener distintos alcances, las variables podrían perfectamente llevar el mismo nombre.
+
+		imprimirNombreMayusculas(nombre)
+
+	</script>
+	
+</body>
+</html>

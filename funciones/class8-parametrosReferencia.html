@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Parámetros como referencia o como valor</title>
+</head>
+<body>
+
+	<script>
+		
+		var yoel = {
+			nombre: 'Yoel',
+			apellido: 'Ribero',
+			edad: 22
+		}
+
+		var santiago = {
+			nombre: 'Santiago',
+			apellido: 'Rodríguez',
+			edad: 17
+		}
+
+		function imprimirNombreMayusculas(persona) {
+			var { nombre } = persona
+			console.log(nombre.toUpperCase())
+		}
+
+		imprimirNombreMayusculas(yoel)
+		imprimirNombreMayusculas(santiago)
+
+		function cumpleanos(persona) {
+			return {
+				...persona, // Con esto le decimos a la función que retorne un objeto nuevo. Con los tres puntos copiamos el objeto persona. Desglosamos el objeto persona pero podemos pisar sus atributos y hasta incorporar nuevos.
+				edad: persona.edad + 1
+				// Esta función nos devuelve un nuevo objeto(persona) pero con el atributo edad incrementado en 1.
+			}
+			// persona.edad += 1
+		}
+
+		// cumpleanos(yoel)
+
+		// JS se comporta de manera distinta con objetos. Los objetos que pasamos como parámetros se pasan por referencia esto quiere decir que si los modificamos dentro del cuerpo de una función su valor se va a ver modificado fuera de la función.
+
+		var yoelMasViejo = cumpleanos(yoel)
+		// En esta variable guardamos el nuevo objeto con la edad nueva. En la varaiable yoel seguimos tienendo al yoel de 22 años.
+
+		// Es importante preguntarnos si queremos que el objeto sea modificado por la función o si queremos mantener los datos del objeto anterior y por lo tanto crear uno nuevo.
+
+	</script>
+	
+</body>
+</html>

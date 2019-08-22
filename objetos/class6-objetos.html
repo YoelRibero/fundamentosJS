@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Objetos</title>
+</head>
+<body>
+
+
+	<script>
+		
+		// var nombre = 'Yoel' Si queremos tener varios nombres de varias personas lo mejor es declarar a cada nombre como un objeto. Los mismo se declaran entre llaves y tienen una clave(atributo) y un valor.
+
+		var yoel = {
+			nombre: 'Yoel',
+			apellido: 'Ribero',
+			edad: 22
+		}
+
+		var santiago = {
+			nombre: 'Santiago',
+			apellido: 'Rodríguez',
+			edad: 17
+		}
+
+
+		// function imprimirNombreMayusculas(nombre) {
+		// 	nombre = nombre.toUpperCase()
+		// 	console.log(nombre)
+		// }
+
+		// imprimirNombreMayusculas(nombre) 
+
+		// Accedemos a un objeto con su nombre y a un atributo poniendo "." y el nombre del atributo.
+
+		// imprimirNombreMayusculas(yoel.nombre)
+		// imprimirNombreMayusculas(santiago.nombre)
+
+		// Podemos hacer que la función actúe solo llamando al nombre del objeto y no tinendo que pasarsela como parámetro.
+
+		function imprimirNombreMayusculas(persona) {
+			// var nombre = persona.nombre.toUpperCase()
+			// console.log(nombre)
+			console.log(persona.nombre.toUpperCase())
+		}
+
+		imprimirNombreMayusculas(yoel)
+		imprimirNombreMayusculas(santiago)
+
+		// En las nuevas versiones de JS hay una forma mejor de desglosar un objeto y es pasando directamente el atributo que queremos obtener, entre llaves, como parámetro de la función.
+
+		// function imprimirNombreMayusculas({ nombre }) {
+		// 	console.log(nombre.toUpperCase())
+		// }
+		// Obtenemos el atributo nombre del objeto que nos llega
+
+		// En caso de que no queramos hacer una variable de objeto la podemos crear directamente en la llamada de la función
+
+		imprimirNombreMayusculas({ nombre: 'Julieta' })
+
+		// Si le pasamos el apellido como parámetro nos dará error ya que lo que espera que le pasemos es el nombre
+
+		// imprimirNombreMayusculas({ apellido: 'González' })
+
+	</script>
+	
+</body>
+</html>

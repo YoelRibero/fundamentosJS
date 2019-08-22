@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Funciones</title>
+</head>
+<body>
+
+	<script>
+		
+		var nombre = 'Yoel', edad = 22
+
+		// Las funciones las declaramos con la palabra reservada function name_function paréntesis y llaves dentro de las cuales va la sentencia que queremos que ocurra
+
+		// function imprimirEdad() {
+		// 	console.log(`${nombre} tiene ${edad} años`)
+		// }
+
+		// Para ejecutar una función la llamamos de la siguiente manera
+
+		// imprimirEdad()
+
+		// Para que la función sea dinámica y acepte los nombres y edades que le queramos pasar le debemos poner parámetros
+
+		function imprimirEdad(n, e) {
+			console.log(`${n} tiene ${e} años`)
+		}
+
+		imprimirEdad(nombre, edad)
+		imprimirEdad('Vicky', 28) // Según lo que le pasamos como parámetros es lo que va a imprimir el programa.
+		imprimirEdad('Juli', 7)
+		imprimirEdad('Santi', 17)
+
+	</script>
+	
+</body>
+</html>
