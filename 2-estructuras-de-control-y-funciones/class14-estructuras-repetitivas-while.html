@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Estructuras Repetitivas: WHILE</title>
+</head>
+<body>
+	
+	<script>
+		
+		var yoel = {
+			nombre: 'Yoel',
+			apellido: 'Ribero',
+			edad: 22,
+			peso: 75
+		}
+
+		// La idea de este ejercicio es que una persona va a la nutricionista y le dicen que tiene que bajar 3Kg. Veremos cuantos días tarde en bajar 3 Kg.
+
+		const INCREMENTO_PESO = 0.2
+		const DIAS_DEL_ANO = 365
+		const META = yoel.peso - 3
+		var dias = 0
+
+		const aumentarDePeso = (persona) => {
+			persona.peso += INCREMENTO_PESO
+		}
+		const adelgazar = (persona) => {
+			persona.peso -= INCREMENTO_PESO
+		}
+
+		const comeMucho = () => Math.random() < 0.3
+		const realizaDeporte = () => Math.random() < 0.4
+
+		// Declaramos un bucle while con la palabra "while", paréntesis "()" y luego llaves "{}". El código que está en las llaves se va a repetir mientras que la condición que está en los paréntesis sea verdadera. Le diremos que mientras yoel.peso sea mayor a la constante META el bucle se siga ejecutando.
+
+		while(yoel.peso > META) {
+			// debugger -> Con esta sentencia hacemos q en la consola el programa se detenga cada vez que llega a esta palabra y así lograr identificar más fácil nuestros errores.
+			if(comeMucho()) {
+				// aumentaDePeso
+				aumentarDePeso(yoel)
+			}
+			if(realizaDeporte()) {
+				// adelgazar
+				adelgazar(yoel)
+			}
+			dias += 1
+		}
+
+		console.log(`Pasaron ${dias} días hasta que ${yoel.nombre} adelgazó 3kg`)
+
+	</script>
+
+</body>
+</html>

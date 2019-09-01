@@ -20,9 +20,9 @@
 			nombre: 'Yoel'
 		}
 
-		var otraPersona = {
-			nombre: 'Yoel'
-		}
+		// var otraPersona = {
+		// 	nombre: 'Yoel'
+		// }
 
 		// A la hora de comparar objetos JS lo que hace es preguntar por la referencia a la variable que estamos utilizando. Al comparar de cualquier manera este caso nos dará FALSE.
 
@@ -33,6 +33,10 @@
 		// 	...yoel
 		// }
 		// Al comparar esto nos da false ya que estamos creando un nuevo objeto dentro de otraPersona, a pesar de que estamos desglosando lo que se crea dentro es un nuevo objeto.
+
+		var otraPersona = yoel
+
+		// Si manipulamos a la var otraPersona por ejemplo cambiandole el nombre "otraPersona.nombre = 'Pepe'", la variable yoel también va a cambiar ya que las dos se guardan en el mismo lugar de la memoria. Cualquiera de las dos que modifiquemos va a afectar en la otra.
 
 	</script>
 	

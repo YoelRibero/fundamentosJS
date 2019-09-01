@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Condicional múltiple: Switch</title>
+</head>
+<body>
+
+	<script>
+		
+		// Esta estructura de control nos permitirá decidir que código ejecutar de acuerdo a múltiples condiciones. 
+
+		// Le diremos al usuario su horóscopo
+
+		// JS nos da una función llamada prompt(). Lo que hace es que podamos interactuar con el usuario y que el nos responda algo.
+
+		var signo = prompt('¿Cuál es tu signo?') // Esta variable va a guardar lo que el usuario escriba en el prompt. Si apreta cancelar la variable guardará null.
+
+		// Podríamos hacer un if por cada uno de los signos e imprimir según lo que nos ponga el usuario.
+
+		/* 
+		if (signo === 'sagitario'){
+			console.log('​Amor: descubrirá que una vocación compartida fortalece a la pareja y mejora la intimidad. Salud: molestias en la piel. Sorpresa: su autoestima crece y disipa temores.')
+		}
+		Y así por cada uno de los signos, lo que nos dejaría mucha cantidad de ifs. Cuando se nos presenta este caso es cuando lo mejor es hacer un switch.
+		*/
+
+		// Para declararlo ponemos la palabra switch, paréntesis y llaves. Dentro del paréntesis va la variable y dentro de la llave los casos posibles.
+
+		switch(signo) {
+			case 'acuario':
+				console.log('​Amor: su pareja le llena de estímulos que vuelca en la intimidad. La sensual armonía asegura el futuro. Salud: riesgo de golpes o caídas. Sorpresa: una ayuda le libra de un peso abrumador.')
+				break // Con break le decimos que paare de ejecutarse el código
+			case 'piscis':
+				console.log('​Amor: su pareja descubrirá su alma sensible y le comprenderá mejor; la intimidad será brillante. Salud: excelente, cada día mejor. Sorpresa: se cancelará un evento muy ansiado.')
+				break
+			case 'aries': 
+				console.log('​Amor: un buen amigo llegará con alguien encantador y todo indica que irá más allá de una nueva amistad. Salud: un dolor se aliviará. Sorpresa: sus comentarios crearán una confusión.')
+				break
+			case 'tauro':
+				console.log('​Amor: la armonía crece y diluye los problemas. Actividades en común fortalecen la afinidad de la pareja. Salud: inicie una dieta. Sorpresa: un entusiasmo derivará en decepción.')
+				break
+			case 'geminis':
+			case 'géminis':
+				console.log('​Amor: asuntos familiares interferirán en actividades de la pareja. Atención, urge decidirse y pedir privacidad. Salud: la energía vital crece. Sorpresa: cuando menos lo espera, llega la solución.')
+				break
+			case 'cancer':
+			case 'cáncer':
+				console.log('​Amor: conviene dialogar y despejar las dudas que le provocan dolor. Todo irá bien si deja de lado los caprichos. Salud: dolor de hombros. Sorpresa: una técnica resultará sanadora.')
+				break
+			case 'leo':
+				console.log('​Amor: su ánimo optimista renueva la armonía y la confianza en la pareja. Se avecina nueva etapa con más compromiso. Salud: evite los esfuerzos. Sorpresa: surge inesperado cambio de rumbo.')
+				break
+			case 'virgo':
+				console.log('Amor: disfruta de momentos divertidos en salidas improvisadas; la pareja madura. Unión fortalecida. Salud: necesidad de descansar. Sorpresa: su prudencia será reconocida por rivales.')
+				break
+			case 'libra':
+				console.log('Amor: le presentarán a alguien muy interesante. Un romance será posible pero actúe con discreción. Salud: practique nuevo deporte. Sorpresa: su talento para persuadir hará el milagro.')
+				break
+			case 'escorpio':
+				console.log('​Amor: alguien tímido le buscará para protegerse; si no lo abruma, el romance surgirá. Salud: debe balancear su dieta. Sorpresa: una influencia le traerá beneficios.')
+				break
+			case 'sagitario':
+				console.log('Amor: descubrirá que una vocación compartida fortalece a la pareja y mejora la intimidad. Salud: molestias en la piel. Sorpresa: su autoestima crece y disipa temores.')
+				break
+			case 'capricornio':
+				console.log('Amor: la relación comienza a afirmarse pero aparecerán terceros que crearán confusión. Salud: se alegra porque pierde peso. Sorpresa: confiarán sin reservas en su criterio.')
+				break
+			default: // Este caso se ejecuta cuando no entuentra que una condición se cumple.
+				console.log('No es un signo zodiacal válido, checkea que está bien escrito y todo en minúsculas.')
+		}
+
+
+
+	</script>
+	
+</body>
+</html>

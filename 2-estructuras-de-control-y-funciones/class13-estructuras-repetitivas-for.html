@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Estructuras Repetitivas: FOR</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		
+		// El bucle for lo utilizamos para recorrer algo (array, objeto) y de el sacar conclusiones o datos
+
+		// Queremos saber cuanto termina pesando la persona(objeto) yoel al final del año
+
+		var yoel = {
+			nombre: 'Yoel',
+			apellido: 'Ribero',
+			edad: 22,
+			peso: 75
+		}
+
+		console.log(`Al inicio del año ${yoel.nombre} pesa ${yoel.peso}Kg`)
+
+		const INCREMENTO_PESO = 0.2
+		const DIAS_DEL_ANO = 365
+
+		const aumentarDePeso = (persona) => {
+			persona.peso += INCREMENTO_PESO
+		}
+
+		/* 
+		Otra forma de escribirla es la siguiente manera
+		const aumentarDePeso = persona =>persona.peso += 200
+
+		Otra forma
+		function aumentarDePeso(persona) {
+			return persona.peso += 200
+		}
+
+		RECORDAR: Las funciones de flecha devuelven la sentencia que le tiramos, por eso no precisamos poner el return
+		*/
+
+		const adelgazar = (persona) => {
+			persona.peso -= INCREMENTO_PESO
+		}
+
+		// El for lo declaramos con la palabra "for" luego paréntesis "()" y finalizando por llaves "{}". Dentro de las llaves, va la sentencia de código a ejecutar. Dentro de los paréntesis lo dividimos en tres partes: 1ero -> la parte inicial (la mayoría de la veces declaramos la variable i), 2do -> va la condición y 3ero -> El incremento.
+
+		for (var i = 1; i <= DIAS_DEL_ANO; i++) {
+			var random = Math.random() // La función Math.random nos tira un número random de 0 a 1.
+
+			if(random < 0.25) {
+				// aumentaDePeso
+				aumentarDePeso(yoel)
+			} else if (random < 0.50) {
+				// adelgazar
+				adelgazar(yoel)
+			}
+		}
+
+		// RECORDAR: Al cambiar el objeto dentro de una función estamos cambiando el objeto original si no queremos que esto pase debemos desglozar el objeto dentro de la función (crear un objeto nuevo)
+
+		console.log(`Al final del año ${yoel.nombre} pesa ${yoel.peso.toFixed(1)}Kg`)
+
+		// Con la función toFixed le decimos a un number cuantos valores después de la coma tomará
+
+	</script>
+
+</body>
+</html>

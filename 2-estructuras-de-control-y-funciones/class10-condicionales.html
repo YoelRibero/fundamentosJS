@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Condicionales</title>
+</head>
+<body>
+
+	<script>
+		
+		var yoel = {
+			nombre: 'Yoel',
+			apellido: 'Ribero',
+			edad: 22,
+			ingeniero: false,
+			percusionista: true,
+			dj: false,		/* -> Valores booleanos */
+			cocinero: false,
+			guitarrista: false,
+			frontEnd: true
+		}
+
+		function imprimirProfesiones(persona) {
+			console.log(`${persona.nombre} es:`)
+
+			// Para que el programa cumpla una tarea cuando sucede una cierta cosa utilizamos los condicionales.
+			if(persona.ingeniero /*=== true*/) {
+				// No hace falta poner el true ya que si ponemos solo persona.ingeniero ya lo toma como valor true
+				console.log('Ingeniero')
+			} else{ // El else lo usamos para decirle al programa que ejecutar en caso de que no se cumpla la condición
+				console.log('No es Ingeniero')
+			}
+
+			if(persona.percusionista) {
+				console.log('Percusionista')
+			}
+			if(persona.dj) {
+				console.log('DJ')
+			}
+			if(persona.cocinero) {
+				console.log('Cocinero')
+			}
+			if(persona.guitarrista) {
+				console.log('Guitarrista')
+			}
+			if(persona.frontEnd) {
+				console.log('Desarrollador Front-End')
+			}
+		}
+
+		imprimirProfesiones(yoel)
+
+		// Desafío: Escribir función si es mayor de edad.
+		// Debe imprimir "nombre es menor de edad o es mayor de edad."
+
+		// Comparadores 
+		// > - Mayor
+		// < - Menor
+		// >= - MAyo o igual
+		// <= - Menor o igual
+
+		function imprimirSiEsMayorDeEdad(persona) {
+			if(persona.edad >= 18) {
+				console.log(`${persona.nombre} es mayor de edad.`)
+			} else {
+				console.log(`${persona.nombre} es menor de edad.`)
+			}
+		}
+
+		imprimirSiEsMayorDeEdad(yoel)
+
+	</script>
+	
+</body>
+</html>

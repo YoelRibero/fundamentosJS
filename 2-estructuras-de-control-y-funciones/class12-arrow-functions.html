@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Arrow Functions</title>
+</head>
+<body>
+	
+	<script>
+		
+		var yoel = {
+			nombre: 'Yoel',
+			apellido: 'Ribero',
+			edad: 22,
+			ingeniero: false,
+			percusionista: true,
+			dj: false,	
+			cocinero: false,
+			guitarrista: false,
+			frontEnd: true
+		}
+
+		var juan = {
+			nombre: 'Juan',
+			apellido: 'Gomez',
+			edad: 13
+		}
+
+		const MAYORIA_DE_EDAD = 18
+
+		// En JS podemos asignarle una función a una variable
+
+		//const esMayorDeEdad = function (persona) {
+			//return persona.edad >= MAYORIA_DE_EDAD
+		//} // La función pasó a ser anónima. No tiene nombre. La invocamos llamando a la variable
+
+		// Otra forma de escribir esto es con un arrow function
+
+		const esMayorDeEdad = (persona) => {
+			return persona.edad >= MAYORIA_DE_EDAD
+		}
+
+		// "Es lo mismo" escribirlo así que de la otra manera. Cuando tenemos un solo parámetro en la sunción podemos sacar los paréntesis. No creo que sea lo mejor igualmente. Podríamos borrar el return y los corchetes y la función seguirá funcionando correctamente.
+
+		// const esMayorDeEdad = persona => persona.edad >= MAYORIA_DE_EDAD
+
+		// Lo que eran tres líneas nos quedó en una
+
+		// Podemos seguir ahorrando código y sacar el llamado al objeto
+
+		// const esMayorDeEdad = ({ edad }) => edad >= MAYORIA_DE_EDAD
+		// con esto ({ edad }) le decimos que le pasaremos un objeto que tendrá una edad
+
+		function imprimirSiEsMayorDeEdad(persona) {
+			if( esMayorDeEdad(persona) ) {
+				console.log(`${persona.nombre} es mayor de edad`)
+			} else{
+				console.log(`${persona.nombre} es menor de edad`)
+			}
+		}
+
+		function permitirAcceso(persona) {
+			if (!esMayorDeEdad(persona)) { // Con el símbolo de exclamación negamos el parámetro que le pasamos
+				console.log(`${persona.nombre} tienes el acceso denegado, OJO!`)
+			}
+		} 
+
+		imprimirSiEsMayorDeEdad(yoel)
+		imprimirSiEsMayorDeEdad(juan)
+
+		permitirAcceso(yoel)
+		permitirAcceso(juan)
+
+		// DESAFÍO
+		/* Escribir función esMenorDeEdad como arrow function que retorne la negación de la llamada a la función esMayorDeEdad */
+
+		const esMenorDeEdad = (persona) => {
+			if ( !esMayorDeEdad(persona) ) {
+				console.log(`${persona.nombre} es menor de edad`)
+			} else{
+				console.log(`${persona.nombre} es mayor de edad`)
+			}
+		}
+
+		esMenorDeEdad(yoel)
+		esMenorDeEdad(juan)
+
+	</script>
+
+</body>
+</html>

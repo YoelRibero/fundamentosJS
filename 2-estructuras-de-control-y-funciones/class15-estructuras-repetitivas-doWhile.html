@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Estructuras Repetitivas: Do While</title>
+</head>
+<body>
+	
+	<script>
+		
+		var contador = 0
+
+		const llueve = () => Math.random() < 0.25
+
+		// Para declarar un do while lo primero que debemos hacer es poner la palabra "do" llaves "{}" luego la palabra "while" y paréntesis "()". La lógica es que si lo que está dentro de los paréntesis se cumple, el do se ejecutará nuevamente. La regla es que EL CÓDIGO SE EJECUTA AL MENOS UNA VEZ. A diferencia del for y while que se ejecuta solo si se cumple la condición.	
+
+		do {
+			contador++
+		} while (!llueve())
+
+		// Le estamos diciendo al programa que se ejecute hasta que no llueva.
+
+		if(contador === 1) {
+			console.log(`Fui a ver si llovía ${contador} vez`)
+		} else {
+			console.log(`Fui a ver si llovía ${contador} veces`)
+		}
+
+	</script>
+
+</body>
+</html>

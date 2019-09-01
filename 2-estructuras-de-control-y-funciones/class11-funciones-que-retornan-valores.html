@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Funciones Que Retornan Valores</title>
+</head>
+<body>
+	
+	<script>
+		
+		var yoel = {
+			nombre: 'Yoel',
+			apellido: 'Ribero',
+			edad: 22,
+			ingeniero: false,
+			percusionista: true,
+			dj: false,	
+			cocinero: false,
+			guitarrista: false,
+			frontEnd: true
+		}
+
+		var juan = {
+			nombre: 'Juan',
+			apellido: 'Gomez',
+			edad: 13
+		}
+
+		// function imprimirSiEsMayorDeEdad(persona) {
+		// 	// Yoel es mayor de edad
+		// 	if(persona.edad >= 18) {
+		// 		console.log(`${persona.nombre} es mayor de edad`)
+		// 	} else{
+		// 		// Yoel es menor de edad
+		// 		console.log(`${persona.nombre} es menor de edad`)
+		// 	}
+		// }
+
+		// Escribiremos un poco mejor este ejemplo
+
+		//var mayoriaDeEdad = 18  Lo utilizamos como variable para que se autoexplique el significado del número 18. Utilizamos const en vez de var ya que es un número que no queremos que cambie, va a ser fijo. Por convención las variables constantes se escriben todas en mayñusculas y separadas por guiones bajos.
+
+		const MAYORIA_DE_EDAD = 18
+
+		function esMeyorDeEdad(persona) {
+			return persona.edad >= MAYORIA_DE_EDAD // El return lo usamos para retornar un valor.
+		} 
+
+		function imprimirSiEsMayorDeEdad(persona) {
+			if( esMeyorDeEdad(persona) ) {
+				console.log(`${persona.nombre} es mayor de edad`)
+			} else{
+				console.log(`${persona.nombre} es menor de edad`)
+			}
+		}
+
+		imprimirSiEsMayorDeEdad(yoel)
+		imprimirSiEsMayorDeEdad(juan)
+
+	</script>
+
+</body>
+</html>
