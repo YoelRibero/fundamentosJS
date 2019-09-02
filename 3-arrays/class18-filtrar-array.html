@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Filtrar un Array</title>
+</head>
+<body>
+
+	<script>
+		
+		var yoel = {
+            nombre: 'Yoel',
+            apellido: 'Ribero',
+            altura: 1.75
+        }
+
+        var alan = {
+            nombre: 'Alan',
+            apellido: 'Perez',
+            altura: 1.86
+        }
+
+        var martin = {
+            nombre: 'Martin',
+            apellido: 'Gomez',
+            altura: 1.85
+        }
+
+        var dario = {
+            nombre: 'Dario',
+            apellido: 'Juarez',
+            altura: 1.71
+        }
+
+        var vicky = {
+            nombre: 'Vicky',
+            apellido: 'Zapata',
+            altura: 1.56
+        }
+
+        var paula = {
+            nombre: 'Paula',
+            apellido: 'Barros',
+            altura: 1.76
+        }
+
+        const esAlta = (persona) => {
+        	return persona.altura > 1.8
+        }
+
+        const esBaja = (persona) => {
+        	return persona.altura <= 1.8
+        }
+
+        const imprimirPersonas = (persona, altura) => {
+        	for(var i = 0; i < persona.length; i++) {
+        		console.log(`${persona[i].nombre} es ${altura}`)
+        	}
+        }
+
+        var personas = [yoel, alan, martin, dario, vicky, paula]
+
+        // Filtraremos por personas altas, para filtrar necesitamos un array y una condición
+
+        var personasAltas = personas.filter(esAlta) // Esta función lleva como parámetro una condición.
+
+        /*
+        Podemos escribir lo mismo de arriba de la siguiente manera
+
+		var personasAltas = personas.filter(function (persona){
+			return persona.altura > 1.8
+		})
+		Declaramos una función anónima. Es más prolijo tener la función por separado.
+        */
+
+        // console.log(personasAltas)
+
+        // DESAFÍO: Escribir el filtrado de las personas bajas
+
+        var personasBajas = personas.filter(esBaja)
+
+        // console.log(personasBajas)
+
+        imprimirPersonas(personasAltas, 'alta')
+        imprimirPersonas(personasBajas, 'baja')
+
+
+
+	</script>
+	
+</body>
+</html>

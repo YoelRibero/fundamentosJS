@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Transformar un Array</title>
+</head>
+<body>
+
+	<script>
+		
+		// Los array nos dan una función llamada map(). Esta nos devuelve un nuevo array en el cual modifica cada uno de los elementos que le pasamos del array original.
+		// Transformaremos la altura que está en metros a centímetros.
+
+		var yoel = {
+            nombre: 'Yoel',
+            apellido: 'Ribero',
+            altura: 1.75
+        }
+
+        var alan = {
+            nombre: 'Alan',
+            apellido: 'Perez',
+            altura: 1.86
+        }
+
+        var martin = {
+            nombre: 'Martin',
+            apellido: 'Gomez',
+            altura: 1.85
+        }
+
+        var dario = {
+            nombre: 'Dario',
+            apellido: 'Juarez',
+            altura: 1.71
+        }
+
+        var vicky = {
+            nombre: 'Vicky',
+            apellido: 'Zapata',
+            altura: 1.56
+        }
+
+        var paula = {
+            nombre: 'Paula',
+            apellido: 'Barros',
+            altura: 1.76
+        }
+
+        const pasarAlturaACms = (persona) => {
+        	// persona.altura *= 100
+        	// return persona
+        	return {
+        		...persona,
+        		altura: persona.altura * 100 
+        	}
+        }
+
+        /*
+        Si al arrow function lo ponemos entre paréntesis va a retornar lo que le pongamos en la sentencia sin necesidad de poner la palabra return
+        const pasarAlturaACms = persona => ({
+        	...persona,
+        	altura: persona.altura * 100 
+        })
+        */
+
+        var personas = [yoel, alan, martin, dario, vicky, paula]
+
+        var personasCms = personas.map(pasarAlturaACms)
+
+        console.log(personasCms) // Si vemos esto, observaremos que efectivamente ahora la altura está en cm, el problema es que también modificamos el array original, para que esto no pase, retornaremos un nuevo objeto con la persona desglozada pisando la altura. Ver función pasarAlturaACms
+
+        // Ahora van a ser objetos en memoria totalmente distintos, si los comparamos siempre dará flase.
+
+
+
+	</script>
+	
+</body>
+</html>

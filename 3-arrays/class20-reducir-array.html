@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Reducir un Array a un valor</title>
+</head>
+<body>
+
+	<script>
+		
+		// La funcion reduce() lo que hace esw reducir un array a un valor único.
+
+		var yoel = {
+            nombre: 'Yoel',
+            apellido: 'Ribero',
+            altura: 1.75,
+            cantidadDeLibros: 111
+        }
+
+        var alan = {
+            nombre: 'Alan',
+            apellido: 'Perez',
+            altura: 1.86,
+            cantidadDeLibros: 78
+        }
+
+        var martin = {
+            nombre: 'Martin',
+            apellido: 'Gomez',
+            altura: 1.85,
+            cantidadDeLibros: 132
+        }
+
+        var dario = {
+            nombre: 'Dario',
+            apellido: 'Juarez',
+            altura: 1.71,
+            cantidadDeLibros: 90
+        }
+
+        var vicky = {
+            nombre: 'Vicky',
+            apellido: 'Zapata',
+            altura: 1.56,
+            cantidadDeLibros: 91
+        }
+
+        var paula = {
+            nombre: 'Paula',
+            apellido: 'Barros',
+            altura: 1.76,
+            cantidadDeLibros: 182
+        }
+
+        var personas = [yoel, alan, martin, dario, vicky, paula]
+
+        // Sacaremos la cuenta total de cuantos libros hay.
+
+        /*
+
+		Podríamos hacerlo con un ciclo for
+
+		var acum = 0
+
+		for(var i = 0; i < personas.length; i++) {
+			acum = acum + personas[i].cantidadDeLibros
+		}
+
+		console.log(`En total todos tienen ${acum} libros`)
+
+		// En total todos tienen 648 libros
+
+        */
+
+        // Hay una forma más sencilla de lograr esto de la siguiente manera
+
+        const reducer = (acum, persona) => {
+        	return acum + persona.cantidadDeLibros
+        }
+
+        /*
+        Podríamos escribir esto mismo de la siguiente manera
+
+        	const reducer = (acum, {cantidadDeLibros}) => acum + cantidadDeLibros
+
+        Recordar, que cuando lo único que hace una función es retornar un valor, le podemos quitar las llaves.
+        */
+
+        var totalLibros = personas.reduce(reducer, 0) // Le pasamos como parámetro a reduce primero la función que invocamos y segundo el contador inicial que en este caso es 0
+
+        console.log(`En total todos tienen ${totalLibros} libros`)
+
+	</script>
+	
+</body>
+</html>

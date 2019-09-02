@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Introducción a Arrays</title>
+</head>
+<body>
+
+    <script>
+        
+        // Estas estructuras de datos nos permites agrupar ciertos tipos de datos dentro de una colección para luego realizar ciertas operaciones con esos elementos
+
+        var yoel = {
+            nombre: 'Yoel',
+            apellido: 'Ribero',
+            altura: 1.75
+        }
+
+        var alan = {
+            nombre: 'Alan',
+            apellido: 'Perez',
+            altura: 1.86
+        }
+
+        var martin = {
+            nombre: 'Martin',
+            apellido: 'Gomez',
+            altura: 1.85
+        }
+
+        var dario = {
+            nombre: 'Dario',
+            apellido: 'Juarez',
+            altura: 1.71
+        }
+
+        var vicky = {
+            nombre: 'Vicky',
+            apellido: 'Zapata',
+            altura: 1.56
+        }
+
+        var paula = {
+            nombre: 'Paula',
+            apellido: 'Barros',
+            altura: 1.76
+        }
+
+        // Si quiséramos agrupar a todas estas personas podríamos guardarlas dentro de una variable llamada personas. Para esto utilizamos el array. Los array se declaran entre corchetes "[]"
+
+        var personas = [yoel, alan, martin, dario, vicky, paula]
+
+        // Para acceder al primer elemento del array ponemos personas[0] ya que el primer elemento de un array es el elemento 0. Si queremos acceder a la altura del primer elemento ponemos personas[0].altura o personas[0]['altura'], es lo mismo.
+
+        // Podemos recorrer este array e imprimir la altura de cada uno.
+
+        for (var i = 0; i < personas.length; i++) {
+            var persona = personas[i]
+            console.log(`${persona.nombre} mide ${persona.altura}mts`)
+        }
+
+    </script>
+    
+</body>
+</html>
