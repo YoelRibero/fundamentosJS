@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Modificando un Prototipo</title>
+</head>
+<body>
+
+	<script>
+
+		// Debemos entender que el prototipo es un objeto más de JS, osea que si lo modificamos en algún momento este va a ser modificado en su objeto original.
+		// Agregaremos la altura y la función para decir si una persona es alta o no.
+		
+		function Persona(nombre, apellido, altura) {
+			this.nombre = nombre
+			this.apellido = apellido
+			this.altura = altura
+		}
+
+		Persona.prototype.saludar = function () {
+			console.log(`Hola, me llamo ${this.nombre} ${this.apellido}`)
+		}
+		// Es muy importante saber dónde colocamos las funciones de los prototipos. Las debemos colocar todas juntas ya que si la declaramos después de llamarla nos dará error y el programa no se ejecutará.
+		Persona.prototype.soyAlto = function () {
+			return this.altura > 1.8 // Si le pasamos esta función a las personas no imprimirá true or false según si la persona mide más de 1.8 o no.
+		}
+
+		// Notar que si cambiamos a las funciones por arrow function esta no nos imprime lo que estamos buscando, esto se da xq this no significa lo mismo en arraow function que en una function normal.
+		// Para saber quien es this en las arrow function -> Próxima clase
+
+		var yoel = new Persona('Yoel', 'Ribero', 1.72)
+		var erika = new Persona('Erika', 'Luna', 1.65)
+		var arturo = new Persona('Arturo', 'Martínez', 1.89)
+
+	</script>
+	
+</body>
+</html>

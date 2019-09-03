@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Cómo Funcionan las Clases en JS</title>
+</head>
+<body>
+
+	<script>
+		
+		// Comenzaremos con prototipos hasta llegar a las clases en JS
+
+		// Para definir un prototipo, lo único que tenemos que hacer es declarar una función. En este caso declararemos a la función Persona()
+
+		function Persona(nombre, apellido, altura) {
+			// Esta función es la que se va a ejecutar cuando creemos una nueva persona.
+			// console.log('Me ejecutaron')
+			this.nombre = nombre // this hace referencia al objeto que acabamos de construir.
+			this.apellido = apellido // Notemos que las variables no son iguales por más q se llamen igual
+			this.altura = altura
+			// return this
+		}
+
+		// Si queremos hacer una función para que cada persona creada salude y se presente. Podemos crear una función desde el prototipo.
+
+		Persona.prototype.saludar = function () {
+			console.log(`Hola, me llamo ${this.nombre} ${this.apellido}`)
+		}
+
+		// Para desafío
+
+		Persona.prototype.esAlta = function () {
+			if(this.altura > 1.80) {
+				console.log(`${this.nombre} ${this.apellido} es una persona alta`)
+			} else {
+				console.log(`${this.nombre} ${this.apellido} es una persona baja`)
+			}
+		}
+
+		var yoel = new Persona('Yoel', 'Ribero', 1.75) // De esta manera creamos una nueva persona. La palabra new lo que hace es que se cree un nuevo objeto y a ese objeto le asigna como prototipo el prototipo q le indiquemos después, luego ejecuta el constructor e implícitamente retorna el objeto que acabamos de construir.
+
+		// yoel.saludar()
+
+		/* Repasamos lo que hicimos. 
+			- La variable yoel crea un nuevo objeto con el prototipo de Persona().
+			- El objeto llama a la función del prototipo y hacemos referencia al objeto con la palabra "this"
+			- Tenemos el atributo nombre y el atributo apellido del objeto que le asignamos como valor los parámetros nombre y apellido.
+			- El return no es necesario ponerlo ya que está implícito en el JS el retorno del valor del objeto creado.
+		*/
+
+		// De esta manera podemos crear varias personas
+
+		var erika = new Persona('Erika', 'Luna', 1.81)
+		var arturo = new Persona('Arturo', 'Martínez', 1.90)
+
+		// Desafío: Crear el atributo altura e imprimir si la persona es alta o no dependiend de si mide más de 1.80 o no.
+
+		yoel.esAlta()
+		erika.esAlta()
+		arturo.esAlta()
+
+	</script>
+	
+</body>
+</html>

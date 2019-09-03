@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>La verdad Oculta sobre las clases en JS</title>
+</head>
+<body>
+
+	<script>
+		
+		// En otros lenguajes de programación existe el concepto de herencia de clases. En JS no existe xq en realidad lo que creamos no son clases sino que son prototipos que son objetos, que le agregamos métodos y reciben funciones, que saben quien es this y saben como ejecutarlas. Pero no existe un sistema con el que yo diga, este prototipo hereda de otro. Lo que existe es la herencia prototipal
+
+		// Para demostrar esto necesitamos crear un prototipo "desarrollador" o sea, un subtipo de persona, viene a ser como una prtotipo hijo.
+
+		// Para que Desarrollador() herede del prototipo Persona(), debemos escribir una función propia y pasarle como parámetros, primero el prototipo hijo y segundo el prototipo padre.
+
+		function heredaDe(prototipoHijo, prototipoPadre){
+			var fn = function () {}
+			fn.prototype = prototipoPadre.prototype
+			prototipoHijo.prototype = new fn
+			prototipoHijo.prototype.constructor = prototipoHijo
+		}
+
+		// Esta es una manera bastante compleja de hacer una herencia, pero es como se venía haciendo hasta el momento. En la próxima clase vemos como hacer esto de una manera mucho más sencilla.
+
+		function Persona(nombre, apellido, altura) {
+			this.nombre = nombre
+			this.apellido = apellido
+			this.altura = altura
+		}
+
+		Persona.prototype.saludar = function () {
+			console.log(`Hola, me llamo ${this.nombre} ${this.apellido}`)
+		}
+
+		Persona.prototype.soyAlto = function () {
+			return this.altura > 1.8
+		}
+
+		function Desarrollador(nombre, apellido) {
+			this.nombre = nombre
+			this.apellido = apellido
+		}
+
+		heredaDe(Desarrollador, Persona)
+
+		Desarrollador.prototype.saludar = function () {
+			console.log(`Hola, me llamo ${this.nombre} ${this.apellido} y soy Desarrollador/a`)
+		}
+
+
+		// var yoel = new Persona('Yoel', 'Ribero', 1.72)
+		// var erika = new Persona('Erika', 'Luna', 1.65)
+		// var arturo = new Persona('Arturo', 'Martínez', 1.89)
+
+		var arturo = new Desarrollador('Arturo', 'Martínez', 1.89)
+		arturo.saludar()
+
+	</script>
+	
+</body>
+</html>

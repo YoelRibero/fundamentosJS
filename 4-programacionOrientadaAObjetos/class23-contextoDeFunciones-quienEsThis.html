@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Contexto de las Funciones: Quién es This?</title>
+</head>
+<body>
+
+	<script>
+
+		// 
+
+		function Persona(nombre, apellido, altura) {
+			this.nombre = nombre
+			this.apellido = apellido
+			this.altura = altura
+		}
+
+		Persona.prototype.saludar = function () {
+			console.log(`Hola, me llamo ${this.nombre} ${this.apellido}`)
+		}
+
+		// Como ya vimos, cuando utilizamos una arrow function no nos devuelve el resultado esperado, esto sucede por el this.
+
+		// Persona.prototype.soyAlto = () => {
+		// 	debugger
+		// 	// Cuando lo miramos en consola vemos que this hace referencia a window y eso no es lo que queremos. En las arrow function this apunta al this que esta fuera de la function, no al this de dentro de la función. this en el espacio global es window por eso no nos funciona el this aquí. DEJAREMOS LA FUNCITION LLAMADA COMO FUNCTION Y NO COMO ARRAOW FUNCTION
+		// 	return this.altura > 1.8
+		// }
+
+		Persona.prototype.soyAlto = function () {
+			return this.altura > 1.8
+		}
+
+		var yoel = new Persona('Yoel', 'Ribero', 1.72)
+		var erika = new Persona('Erika', 'Luna', 1.65)
+		var arturo = new Persona('Arturo', 'Martínez', 1.89)
+
+	</script>
+	
+</body>
+</html>
