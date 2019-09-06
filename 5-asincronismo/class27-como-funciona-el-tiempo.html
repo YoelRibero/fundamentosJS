@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Cómo funciona el tiempo en JavaScript</title>
+</head>
+<body>
+
+	<script>
+		
+		console.log('a')
+		// Veamos el ejemplo para que ejecutar este console.log en 2s. Para esto debemos llamar a la function setTimeout(), esta recibe dos parámetros, el primero es una función y el segundo es el delay expresado en milisegundos. 
+		// setTimeout(() => console.log('b'), 2000)
+		// Ahora, que pasa si le decimos que el delay sea de 0 segundos. 
+		setTimeout(() => console.log('b'), 0)
+		//El orden de aparición será -> a c b. ¿cómo es esto posible?. Esto se da por el asincronismo, el programa cuando llega a la líneas 2 de código dice, "voy a ejecutar esta función", por lo tanto la pasa a la "cola de tareas" y sigue ejecutando el programa con la línea que sigue, por eso ejecuta c. Cuando JS termina de ejecutar el programa principal es cuando recién irá a la cola de tareas a ejecutar lo que tiene allí, en este caso es la arrow function que dice que imprime por consola "b". 
+		console.log('c')
+
+
+		// IMPORTANTE: A tener en cuenta que el delay que le pasamos es un delay mínimo, ya que hasta que JS no termine de ejecutar nuestro programa principal, NO VA A EJECUTAR lo que tiene en la "cola de tareas", es fácil ver esto con el siguiente ejemplo. Declaramos un setTimeout y le pasamos el arrow function para que ejecute por consola la letra d. Luego emularemos un programa largo con un ciclo for que recorra una cantidad de número muy grande. Si vemos esto en el navegador, vemos que el delay es grandísimo llega a tardar de dos minutos para arriba en ejecutarse la función e imprimir la letra "d".
+
+		// setTimeout(() => console.log('d'), 2000)
+
+		// for (var i = 0; i < 100000000000; i++) {
+
+		// }
+
+	</script>
+	
+</body>
+</html>

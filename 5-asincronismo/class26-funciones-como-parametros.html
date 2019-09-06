@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Funciones como Parámetros</title>
+</head>
+<body>
+
+	<script>
+		
+		class Persona {
+			constructor(nombre, apellido, altura) {
+				this.nombre = nombre
+				this.apellido = apellido
+				this.altura = altura
+			}
+			// Pasamos como parámetro una función, que va a ser opcional, tal vez la mande o no.
+			saludar(fn) { 
+
+				// Para no repetir código podríamos guardar los this. ... en una variable.
+				// var nombre = this.nombre
+				// var apellido = this.apellido
+				// O para que sea más facil aún, podríamos escribirlos de esta manera, son equivalentes.
+				var { nombre, apellido } = this
+				// Pasamos entre llaves nombre y apellido y le decimos que los saque de this.
+
+				// console.log(`Hola, me llamo ${this.nombre} ${this.apellido}`)
+				console.log(`Hola, me llamo ${nombre} ${apellido}`)
+				// Preguntaremos se la función está definida dentro del parámetro
+				if(fn) {
+					fn(nombre, apellido, false) // Evaluamos: Si nos pasan una función, llamará a la misma con los parámetros mencionados. Importante saber: En lugar de false podriamos pasar null o no pasar ningún valor ya que en este caso la persona no es dev y si no le pasamos valor dará undefined y undefined es FALSE.
+				}
+			}
+
+			soyAlto() {
+				return this.altura > 1.8
+			}
+		}
+
+		class Desarrollador extends Persona {
+			constructor(nombre, apellido, altura) {
+				super(nombre, apellido, altura)
+			}
+			saludar(fn) {
+
+				var { nombre, apellido } = this
+
+
+				console.log(`Hola, me llamo ${nombre} ${apellido} y soy Desarrollador/a`)
+				if(fn) {
+					fn(nombre, apellido, true) // Lo mismo corre en este caso,´en vez de true podríamos pasar cualquier cosa que evalúe true
+				}
+			}
+		}
+
+		// Debemos saber que podemos pasar funciones como parámetros. Haremos el ejemplo de responder el saludo a la persona cada vez que saludamos.
+
+		function responderSaludo(nombre, apellido, esDev) {
+			console.log(`Buen día ${nombre} ${apellido}`)
+			if(esDev) {
+				console.log(`Ah mirá, no sabía que eras desarrollador/a`)
+			}
+		}
+
+		var yoel = new Persona('Yoel', 'Ribero', 1.75)
+		var erika = new Persona('Erika', 'Luna', 1.65)
+		var arturo = new Desarrollador('Arturo', 'Martínez', 1.89)
+
+		// Le pasaremos como parámetro la función responderSaludo() a saludar
+
+		yoel.saludar()
+		erika.saludar(responderSaludo)
+		arturo.saludar(responderSaludo)
+
+	</script>
+	
+</body>
+</html>

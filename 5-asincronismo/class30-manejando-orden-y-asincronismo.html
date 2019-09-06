@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Manejando el Orden y el Asincronismo en JavaScript</title>
+</head>
+<body>
+	
+	<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+
+  	<script>
+  		
+  		const API_URL = 'https://swapi.co/api/'
+		const PEOPLE_URL = 'people/:id'
+		const opts = { crossDomain: true }
+
+		// La única manera de mostrar en orden las respuestas es si mantenemos ese orden a lo largo del programa. Haremos que la función acepte un segundo parámetro que será una funciton llamada callback. Pasaremos la function onPeopleResponse(primer callback) al parámetro de $.get directamente.
+		// Ahora a la function obtenerPersonaje le pasaremos como callback una función anonima que lo que hará es ejecutar la función obtenerPersonaje() siguiente que queremos ejecutar luego de que se imprima ese personaje.
+
+		function obtenerPersonaje(id, callback) {
+			const url = `${API_URL}${PEOPLE_URL.replace(':id', id)}`
+			$.get(url, opts, (person) => {
+				console.log(`Hola, yo soy ${person.name}`)
+				// Le decimos que si nos envían un callback, ejecute la función.
+				if(callback) {
+					callback()
+				}
+			})
+		}
+
+		obtenerPersonaje(1, function () {
+			obtenerPersonaje(2, function() {
+				obtenerPersonaje(3, function() {
+					obtenerPersonaje(4, function() {
+						obtenerPersonaje(5, function() {
+							obtenerPersonaje(6, function() {
+								obtenerPersonaje(7)
+							})
+						})
+					})
+				})
+			})
+		})
+
+		// De esta manera ejecutamos los request en serie y obtenemos los personajes en el orden que queremos.
+		// Esto que acabamos de hacer se lo conoce como "callback hell" el infierno de los callbacks. Más adelante vemos como solucionar esto.
+		
+
+  	</script>
+
+
+</body>
+</html>

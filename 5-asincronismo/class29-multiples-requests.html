@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Haciendo Múltiples Requests</title>
+</head>
+<body>
+
+	<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+
+  <script>
+  	
+  	const API_URL = 'https://swapi.co/api/'
+	const PEOPLE_URL = 'people/:id'
+	const opts = { crossDomain: true }
+
+	const onPeopleResponse = (person) => {
+		console.log(`Hola, yo soy ${person.name}`)
+	}
+
+	// Veremos como imprimir varias persona en paralelo en un mismo request
+
+	function obtenerPersonaje(id) {
+		const url = `${API_URL}${PEOPLE_URL.replace(':id', id)}`
+		$.get(url, opts, onPeopleResponse)
+	}
+
+	// Vemos que al llamarlo de esta manera, las respuestas no nos llegan en el orden en que nos llegaran los datos, es imposible de saberlo, depende del servidor y cuanto tarde en responder a los request, aquí vemos el asincronismo en su máxima expresión. Igualmente podemos tener la forma de manejar este orden, en la próxima clase se trata eso.
+	obtenerPersonaje(1)
+	obtenerPersonaje(2)
+	obtenerPersonaje(3)
+	obtenerPersonaje(4)
+	obtenerPersonaje(5)
+	
+
+  </script>
+	
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Callbacks</title>
+</head>
+<body>
+	
+	<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+	<script>
+		
+		// En esta clase utilizaremos jQuery para acceder a la api de Star Wars. Para obtener los datos debemos hacer un request
+
+		// Url de donde traeremos la API
+		const API_URL = 'https://swapi.co/api/'
+		const PEOPLE_URL = 'people/:id'
+
+		// Para hacer un request en jQuery debemos llamar al método get con $.get(). Este get acepta vario parámetros, primero la url que vamos a acceder, que en este caso debemos llamar a la url completa. Utilizamos la primer variable que creamos pegada a la segunda variable, con la deferencia de que tenemos que cambiar el :id por el id de la persona que queremos imprimir, que en este caso es 1. Para reemplazar un valor utilizamos "replace()", recibe dos parámetro, primero lo que vamos a reemplazar, segundo el valor con el que vamos a reemplazar ese valor. 
+		// El segundo parámetro que recibe get() es indicar a que página se hará el request, debemos decirle en este caso que la petición se hará a una url externa. Lo hacemos con crossDomain
+		// El tercer parámetro va a ser el CALLBACK. El callback es una función que se va a ejecutar en el futuro(no sabemos cuando) pero el $.get será el encargado de llamarlo. Lo llamará cuando el request finalice. Puedo pasar que el callback nunca se ejecute.
+
+		const lukeUrl = `${API_URL}${PEOPLE_URL.replace(':id', 1)}`
+		const opts = { crossDomain: true }
+
+		// $.get(lukeUrl, opts, function (data) {
+		// 	// console.log(arguments) Con esto vemos los parámetros de la función callback. El que nos interesa es el parámetro data.
+		// 	console.log(`Hola yo soy ${data.name}`)
+		// })
+
+		// También podemos declarar la función callback por fuera.
+
+		const onPeopleResponse = (person) => {
+			console.log(`Hola yo soy, ${person.name}`)
+		}
+
+		$.get(lukeUrl, opts, onPeopleResponse)
+
+	</script>
+	
+</body>
+</html>
