@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Async-await: Lo último en asincronismo</title>
+</head>
+<body>
+
+	<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+
+  <script>
+
+  		// Veremos async-await en teoría es la tarea más sencilla para escribir código asíncrono. Resolveremos lo que hicimos en la clase anterior con async-await
+
+		const API_URL = 'https://swapi.co/api/'
+		const PEOPLE_URL = 'people/:id'
+		const opts = { crossDomain: true }
+
+		function obtenerPersonaje(id) {
+			return new Promise(function (resolve, reject) {
+
+				const url = `${API_URL}${PEOPLE_URL.replace(':id', id)}`
+
+				$
+					.get(url, opts, function (data) {
+						resolve(data) 
+					})
+					.fail( () => reject(id) )
+
+			})
+
+		}
+
+		function onError(id) { 
+			console.log(`Sucedió un error al obtener el personaje ${id}`)
+		}
+
+		// Crearemos una function llamada obtenerPersonajes que realizará todo lo que hicimos en el ejercicio anterior.
+
+		async function obtenerPersonajes() {
+
+			var ids = [1, 2, 3, 4, 5, 6, 7]
+			var promesas = ids.map( id => obtenerPersonaje(id))
+			// Crearemos una variable que guardara los personajes. A esta variable le asignaremos el valor de una tarea asyncrona. Queremos que cuando todas las promesas se resuelvan ese resultado lo guarde en la variable personajes. Para hacer esto utilizamos la palabra clave "await", lo que hacemos es que la ejecución del código se detenga allí (en await) y hasta que todos las promesas no esten resueltas el código no se sigue ejecutando. Para poder utilizar await tenemos que marcar a la función como asyncrona con la palabra "async". Para poder usar la parte ayncrona debemos poner toda la parte asyncrona dentro de un bloque try-catch
+
+			try {
+
+				var personajes = await Promise.all(promesas)
+				// Lo que queremos hacer con los personajes lo ponemos debajo.
+				console.log(personajes)
+
+			} catch  (id) {
+				onError(id)
+			}
+
+		}
+		
+		// Llamada a la function
+		obtenerPersonajes()
+
+  </script>
+	
+</body>
+</html>

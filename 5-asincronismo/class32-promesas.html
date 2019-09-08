@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Promesas</title>
+</head>
+<body>
+
+	<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+
+  <script>
+		// Vimos que con los callbacks teníamos un problema, que es que cuando llamamos un callback dentro de otro y dentro de otro y dentro de otro nuestro código se vuelve muy difícil de leer, no es lo que queremos que nos pase. (callbacks hell)
+		
+		// Para resolver este problema es que estan las promesas. Tenemos que pensarlas como valor que aún no conocemos, es la promesa de que en algún momento allí va a haber un valor cuando una acción asíncrona suceda y se resuelva.
+
+		/*
+
+		Las promesas tienen tres estados en los que pueden estar.
+		1) "pending" cuando creamos una promesa esta va a estar en estado pending. Es el estado inicializador de la promesa.
+		2) Cuando la promesa se resuelve pasa a estar en estado "fulfilled". La llamamos con la función .then(val => ...). Le pasamos como parámetro la función que hará lo que nosotros esperamos que haga.
+		3) Si la promesa no se resuleve exitosamente pasa a estado "rejected". La llamamos con la función .catch(err => ...). Le pasamos como parámetro una function q tendrá el error que sucedió. 
+
+		Las promesas no siempre resuelven estados asíncronos, también pueden devolver cosas síncronas.
+
+		Declaramos una promesa de la siguiente manera:
+
+		new Promise(function (resolve, rejected) {
+			...
+		}).then(valor => {
+			...
+		}).catch(valor => {
+			...
+		})
+
+		Otra cosa que podemos hacer es q luego de llegar al estado de fulfilled podemos retornar otra promesa dentro del .then y de esa manera ir encadenandolas en sucesivas acciones asíncronas y cada una de ellas puede ser rechazada o resuelta en una nueva promesa que terminará en el estado de fulfilled.
+
+		*/
+
+		const API_URL = 'https://swapi.co/api/'
+		const PEOPLE_URL = 'people/:id'
+		const opts = { crossDomain: true }
+
+		// Modificaremos esta función para que nos retorne una promesa en vez de recibir un callback como parámetro.
+		function obtenerPersonaje(id) {
+			return new Promise(function (resolve, reject) {
+
+				const url = `${API_URL}${PEOPLE_URL.replace(':id', id)}`
+
+				$
+					.get(url, opts, function (data) {
+						// Cuando esta función se ejecute es cuando se va a ejecutar la promise(resolve).
+						resolve(data) // Estendemos como data al personaje
+					})
+					.fail(() => reject(id))
+
+			})
+
+		}
+
+		// Función que imprime el error
+
+		function onError(id) { // id es el id que nos llega desde .fail()
+			console.log(`Sucedió un error al obtener el personaje ${id}`)
+		}
+
+		// Escribimos la función para llamar al personaje utilizando promesas. Le pasamos solo el id que nos interesa, no hay segundo parámetro ya que para que pase lo que queremos debemos llamar a la función .then(), dentro de then le pasamos la función que vamoa a ejecutar cuando la ac´ción se resuelva de manera correcta.
+
+		obtenerPersonaje(1)
+			.then(function (personaje) { // Personaje es el data que nos llega desde .get
+				console.log(`El personaje 1 es ${personaje.name}`)
+			})
+			.catch(onError) 
+
+
+
+  </script>
+	
+</body>
+</html>

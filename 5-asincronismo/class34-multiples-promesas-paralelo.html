@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Múltiples promesas en paralelo</title>
+</head>
+<body>
+
+	<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+
+  <script>
+
+  		// Veremos como hacer los request en paralelo y obtener las respuestas en el orden que queremos
+
+		const API_URL = 'https://swapi.co/api/'
+		const PEOPLE_URL = 'people/:id'
+		const opts = { crossDomain: true }
+
+		function obtenerPersonaje(id) {
+			return new Promise(function (resolve, reject) {
+
+				const url = `${API_URL}${PEOPLE_URL.replace(':id', id)}`
+
+				$
+					.get(url, opts, function (data) {
+						resolve(data) 
+					})
+					.fail( () => reject(id) )
+
+			})
+
+		}
+
+		function onError(id) { 
+			console.log(`Sucedió un error al obtener el personaje ${id}`)
+		}
+
+		// Creamos un array con los id`s de los personajes
+		var ids = [1, 2, 3, 4, 5, 6, 7]
+
+		// Generaremos un nuevo array con multiples promesas, donde cada elemento del array sea una promesa, la de obtener un personaje con su respectivo id. Utilizaremos map(), para recorrer el array y por cada elemento obtener uno nuyevo que será una promesa.
+
+		var promesas = ids.map(function (id) {
+			return obtenerPersonaje(id)
+		})
+
+		// Otra forma de escribir esto con arrow funtion
+		// var promesas = ids.map(id => obtenerPersonaje(id))
+
+		// Si miramos la consola veremos que la var promesas está llena de promesas(7). Para obtener los valores de estas promesas llamaremos a un método que tiene promesas que se llama Promises.all(), a este le debemos pasar un array de promesas y a este lo podemos encadenar con un .then, dentro del .thgen pasaremos los personajes.
+
+		Promise
+			.all(promesas)
+			.then(personajes => console.log(personajes) )
+			// .then(function(personajes) {
+			// 	for (var i = 0; i < personajes.length; i++) {
+			// 		console.log(`Me llamo ${personajes[i].name}`)
+			// 	}
+			// }) Forma convencional para recorrer e imprimir el nombre de cada personaje
+			.catch(onError)
+
+		// Aquí vemos la potencia de las promesas, ya que podemos encadenarlas paralelamente, el array nos quedó en orden de cómo queremos imprimir a los personajes
+
+
+		// obtenerPersonaje(1)
+		// 	.then( personaje1 => {
+		// 		console.log(`El personaje 1 es ${personaje1.name}`)
+		// 		return obtenerPersonaje(2)
+
+		// 	})
+		// 	.then( personaje2 => {
+		// 		console.log(`El personaje 2 es ${personaje2.name}`)
+		// 		return obtenerPersonaje(3)
+
+		// 	})
+		// 	.then( personaje3 => {
+		// 		console.log(`El personaje 3 es ${personaje3.name}`)
+		// 		return obtenerPersonaje(4)
+
+		// 	})
+		// 	.then( personaje4 => {
+		// 		console.log(`El personaje 4 es ${personaje4.name}`)
+		// 		return obtenerPersonaje(5)
+
+		// 	})
+		// 	.then( personaje5 => {
+		// 		console.log(`El personaje 5 es ${personaje5.name}`)
+		// 		return obtenerPersonaje(6)
+
+		// 	})
+		// 	.then( personaje6 => {
+		// 		console.log(`El personaje 6 es ${personaje6.name}`)
+		// 		return obtenerPersonaje(7)
+
+		// 	})
+		// 	.then( personaje7 => {
+		// 		console.log(`El personaje 7 es ${personaje7.name}`)
+
+		// 	})
+		// 	.catch(onError) 
+
+
+  </script>
+	
+</body>
+</html>

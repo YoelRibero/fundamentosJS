@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Manejo de errores con Callbacks</title>
+</head>
+<body>
+
+	<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+
+	<script>
+
+		// Veremos como manejar errores con callbacks por ejemplo cuando nos quedamos sin internet.
+		
+		const API_URL = 'https://swapi.co/api/'
+		const PEOPLE_URL = 'people/:id'
+		const opts = { crossDomain: true }
+
+		function obtenerPersonaje(id, callback) {
+			const url = `${API_URL}${PEOPLE_URL.replace(':id', id)}`
+
+			// Llamaremos al método fail() que recibirá un callback que se ejecutará si ocurre algun error.
+			$
+				.get(url, opts, callback)
+
+				.fail(function () { // Podemos escribirla como arrow function
+					console.log(`Sucedió un error. No se pudo obtener el personaje ${id}`)
+				})
+			// Para forzar un error nos dirigimos a la consola, en la pestaña network, deshabilitamos el cache y en la parte que dice online, recargamos y mientras está haciendo los request le ponemos offline y veremos el fallo.
+
+		}
+
+		obtenerPersonaje(1, function (personaje) {
+			console.log(`Hola, yo soy ${personaje.name}`)
+			// Lo que sucede aquí es que le pasamos directamente la función callback que es a la que le decimos lo que queremos hacer con el personaje.
+
+			obtenerPersonaje(2, function(personaje) {
+				console.log(`Hola, yo soy ${personaje.name}`)
+
+				obtenerPersonaje(3, function(personaje) {
+					console.log(`Hola, yo soy ${personaje.name}`)
+
+					obtenerPersonaje(4, function(personaje) {
+						console.log(`Hola, yo soy ${personaje.name}`)
+
+						obtenerPersonaje(5, function(personaje) {
+							console.log(`Hola, yo soy ${personaje.name}`)
+
+							obtenerPersonaje(6, function(personaje) {
+								console.log(`Hola, yo soy ${personaje.name}`)
+
+								obtenerPersonaje(7, function(personaje) {
+									console.log(`Hola, yo soy ${personaje.name}`)
+								})
+							})
+						})
+					})
+				})
+			})
+		})
+
+	</script>
+	
+</body>
+</html>
