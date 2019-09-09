@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Simon Dice</title>
+
+	<style>
+		
+
+      body {
+        margin: 0;
+        background: #dedede;
+        display: flex;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .gameboard {
+        height: 100vh;
+        width: 100vh;
+        border-radius: 50%;
+        overflow: hidden;
+        margin: 0 auto;
+        max-height: 60vh;
+        max-width: 60vh;
+      }
+
+      .color {
+        width: 50%;
+        height: 50%;
+        display: inline-block;
+      }
+
+      .left {
+        float: left;
+      }
+
+      .right {
+        float: left;
+      }
+
+      .celeste {
+        background: #22a6b3;
+      }
+
+      .celeste.light {
+        background: #7ed6df;
+      }
+
+      .violeta {
+        background: #be2edd;
+      }
+
+      .violeta.light {
+        background: #e056fd;
+      }
+
+      .naranja {
+        background: #f0932b;
+      }
+
+      .naranja.light {
+        background: #ffbe76;
+      }
+
+      .verde {
+        background: #6ab04c;
+      }
+
+      .verde.light {
+        background: #badc58;
+      }
+
+      .btn-start {
+        width: 400px;
+        height: 100px;
+        background: #ecf0f1;
+        color: #2c3e50;
+        font-size: 2.5rem;
+        position: absolute;
+        top: calc(50% - 50px);
+        left: calc(50% - 200px);
+      }
+
+      .hide {
+        display: none;
+      }
+
+      * {
+      	font-family: 'Arial';
+      }
+
+	</style>
+</head>
+<body>
+
+	<div class="gameboard">
+		<div id="celeste" class="color celeste left" data-color="celeste"></div>
+		<div id="violeta" class="color violeta right" data-color="violeta"></div>
+		<div id="naranja" class="color naranja left" data-color="naranja"></div>
+		<div id="verde" class="color verde right" data-color="verde"></div>
+		<button id="btnEmpezar" class="btn-start" onclick="empezarJuego()">Empezar a jugar!</button>
+	</div>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+	<!-- Utilizamos este plugin para desplegar lindas alertas -->
+
+	<script>
+
+		// 4- Obtenemos los divs del html
+		const btnEmpezar = document.getElementById('btnEmpezar')
+		const celeste = document.getElementById('celeste')
+		const violeta = document.getElementById('violeta')
+		const naranja = document.getElementById('naranja')
+		const verde = document.getElementById('verde')
+		// 23- Guardamos el valor del ultimo nivel
+		const ULTIMO_NIVEL = 10
+
+		// 2- Creamos la clase Juego. Esta clase tendrá toda la lógica del video juego.
+
+		class Juego {
+			constructor() {
+				this.inicializar()
+				this.generarSecuencia()
+				// 25- Ponemos este llamado dentro de un setTimeout para que el juego demore .5s en comenzar
+				setTimeout( this.siguienteNivel, 500 )
+			}
+
+			inicializar() {
+				this.siguienteNivel = this.siguienteNivel.bind(this)
+				// 18- Podemos pasar el bind de abajo aquí para que quede elazado de primera y así abajo llamarlo de la manera más corta.
+				// this.elegirColor = this.elegirColor.bind(this)
+				// 3- Lo primero que hace esta function es ocultar el botón de empezar juego.
+				btnEmpezar.classList.toggle('hide')
+				// 6- Pasamos el nivel del juego
+				this.nivel = 1
+				// 7- Guardamos los colores dentro del objeto.
+				this.colores = {
+					// celeste: celeste,
+					// En JS cuando el atributo y el valor llevan el mismo nombre nos podemos ahorrar escribir los dos escribiendo el nombre una vez sola.
+					celeste,
+					violeta,
+					naranja,
+					verde
+				}
+			}
+
+			generarSecuencia() {
+				// 5- Generaremos la secuencia de colores que el usuario tiene que repetir a lo largo del juego. Definiremos un array de números del 0 al 3 dónde cada uno representará un color. Debemos ejecutar esta secuencia de manera random. Crearemos un array con new Array, lo encadenamos a la función fill pasandole a cada uno un valor por default de 0 y luego llamamos a la función map() y dentro de map retornaremos un Math.random() que lo multiplicaremos * 4 para que nos de un número entre 0 y 4 y lo haremos que redondee para abajo, así este número nunca será 4.
+
+				this.secuencia = new Array(ULTIMO_NIVEL).fill(0).map(n => Math.floor(Math.random() * 4) )
+
+				// Generamos un Array con 10 valores, donde todos serán 0, osea, nos genera 10 ceros. Con la función map le decimos que al n(en este caso será 0) le pase la función Math.random() (este nos dará un número random entre 0 y 1. Lo que haremos es multiplicarlo por 4 para que nos de un número = 0 y menor a 4). Para redondear para abajo este número final ponemos la sentencai dentro de Math.floor().
+			}
+
+			siguienteNivel() {
+				// 21- Creamos un subnivel
+				this.subnivel = 0
+				// 8- Esta función hará que cada vez que llegamos a un nuevo nivel se ilumine la secuencia que el usuario debe repetir.
+				this.iluminarSecuencia()
+				// 15- Llamaremos a un método que obtendrá y agregara los eventos de click a los botones.
+				this.agregarEventosClick()
+			}
+
+			// 10- Crearemos la función que transforma los números a colores
+			transformarNumeroAColor(numero) {
+				switch (numero) {
+					case 0:
+						return 'celeste'
+						// No hace falta poner un breake ya que estamos poniendo un return
+					case 1:
+						return 'violeta'
+					case 2:
+						return 'naranja'
+					case 3:
+						return 'verde'
+				}
+			}
+			// 20- Transformaremos los colores a números para utilizarlos en la function elegirColor
+			transformarColorANumero(color) {
+				switch (color) {
+					case 'celeste':
+						return 0
+						// No hace falta poner un breake ya que estamos poniendo un return
+					case 'violeta':
+						return 1
+					case 'naranja':
+						return 2
+					case 'verde':
+						return 3
+				}
+			}
+
+			iluminarSecuencia() {
+				// 9- Esta función recorrerá el array secuencia hasta el nivel en el que esté el usuario. A medida que avance en los niveles incrementaremos el this.nivel
+				for (let i = 0; i < this.nivel; i++) {
+					// let lo que hace es que esta variable mantenga sus valores y que el ciclo for no la pise cada vez que recorre. Igualmente como no queremos que cambie este array lo asignamos con const
+					const color = this.transformarNumeroAColor(this.secuencia[i])
+					// 11- Este for recorrerá y por cada número que tiene secuencia nos traerá un color. Si la secuencia es 0 1 0 2, el array traerá 'celeste', 'violeta', 'celeste', 'naranja'.
+					// 12- Llamaremos a la function iluminarColor pasandole como parámetro el color que queremos iluminar.
+					// 15- Le pasaremos un delay para que la función se ejecute cada cierto tiempo y así no parezca que todos los botones se iluminan al mismo tiempo.
+					setTimeout( () => this.iluminarColor(color), 1000 * i )
+					// Es importante poner el i para que se vallan iluminando en orden, o sea, el primer i será 0 por lo tanto se iluminará enseguida, el segundo vale 1 por lo tanto tardará 1s y así sucesivamente.
+				}
+			}
+
+			// 13- Creamos la función iluminarColor()
+			iluminarColor(color) {
+				this.colores[color].classList.add('light')
+				// Luego de que se prende lo apagaremos para que nos de el efecto que queremos.
+				setTimeout( () => this.apagarColor(color), 350 )
+			}
+
+			// 14- Escribimos la function apagarColor
+			apagarColor(color) {
+				this.colores[color].classList.remove('light')
+			}
+
+			// 16- Creamos la function agregarEventosClick
+			agregarEventosClick() {
+				// Esto se ejecuta de manera asyncrona.
+				// this en este caso es el botón al que le damos click y no la clase Juego. Para que this sea el juego, lo debemos "atar", esto lo hacemos con la palabra "bind()" pasandole como parámetro a this.
+				this.colores.celeste.addEventListener('click', this.elegirColor.bind(this))
+				this.colores.verde.addEventListener('click', this.elegirColor.bind(this))
+				this.colores.violeta.addEventListener('click', this.elegirColor.bind(this))
+				this.colores.naranja.addEventListener('click', this.elegirColor.bind(this))
+			}
+
+			// 24- Creamos el eliminarEventosClick
+			eliminarEventosClick() {
+				this.colores.celeste.removeEventListener('click', this.elegirColor.bind(this))
+				this.colores.verde.removeEventListener('click', this.elegirColor.bind(this))
+				this.colores.violeta.removeEventListener('click', this.elegirColor.bind(this))
+				this.colores.naranja.removeEventListener('click', this.elegirColor.bind(this))
+			}
+
+			// 17- Function elegirColor
+			elegirColor(ev) {
+				// this en este caso es el botón al que le damos click y no la clase Juego. Para que this sea el juego, lo debemos "atar", esto lo hacemos con la palabra "bind()" pasandole como parámetro a this.
+				// console.log(this)
+				// console.log(ev)
+				// 19- Utilizaremos el data-color para evaluar si el usuario hizo click de manera correcta en el botón que se iluminó.
+				const nombreColor = ev.target.dataset.color
+				const numeroColor = this.transformarColorANumero(nombreColor)
+				this.iluminarColor(nombreColor)
+				// 22- Comparamos el número del color con la secuencia pero en la posición del subnivel en que se encuentra
+				if (numeroColor === this.secuencia[this.subnivel]) {
+					this.subnivel++
+					if (this.subnivel === this.nivel) {
+						this.nivel++
+						// Eliminamos los eventos de click
+						this.eliminarEventosClick()
+						if(this.nivel === (ULTIMO_NIVEL + 1) ) {
+							// Ganó
+							this.ganoElJuego()
+						} else {
+							// Si no es el último nivel debemos hacer que avance
+							setTimeout(this.siguienteNivel, 1500)
+						}
+					}
+				} else {
+					// Si no es correcto el botón que tocó perdió
+					this.perdioElJuego()
+				}
+			}
+
+			// 26- Creamos la función para cuando gane el juego.
+			ganoElJuego() {
+				// Aquí utilizamos plugin de alerta. Primer parámetro title, 2do subtítulo y tercero que tipo de alerta será. El swal nos devuelve una promesa, por lo tanto le podemos indicar lo que queremos que haga luego de cerrar el swal.
+				swal('Platzi', 'Felicitaciones, ganaste el juego!', 'success')
+					.then( () => {
+						this.inicializar()
+					})
+			}
+
+			// 27- Creamos la función para cuando pierde el juego.
+			perdioElJuego() {
+				swal('Platzi', 'Lo lamentamos, perdiste :(', 'error')
+					.then( () => {
+						this.eliminarEventosClick()
+						this.inicializar()
+					})
+			}
+
+		}
+		
+		// 1- Definimos la function llamada empezarJuego
+		function empezarJuego() {
+			//alert('El juego va a comenzar')
+			// Para debugear y ver lo que esta pasando por consola ponemos a la variable en window.juego.
+			window.juego = new Juego()
+			// var juego = new Juego()
+		}
+
+	</script>
+	
+</body>
+</html>
